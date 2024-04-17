@@ -1,5 +1,4 @@
 <template>
-  <!-- <section class="section shop" id="shop"> -->
   <div class="section__title">
     <h1>shop</h1>
   </div>
@@ -97,7 +96,6 @@
 
                 <div class="card-body pt-5">
                   <div class="d-flex align-items-center price">
-                    <!-- <div class="del mr-2"><span class="text-dark">{{ (product.priceR).toLocaleString('en-US', { style: 'currency', currency:'VND'}) }}</span></div> -->
                     <div class="font-weight-bold price">
                       {{ (product.price).toLocaleString('vi-VN') }} VND
                     </div>
@@ -107,25 +105,6 @@
             </div>
           </div>
         </div>
-
-        <!-- <div class="card-container">
-          <div type="button" data-toggle="modal" data-target="#exampleModalCenter" class="col-lg-4 ml-1 col-md-6"
-            v-for="product in filteredProducts" :key="product.id">
-            <div @click="copyID(product._id)" class="card d-flex flex-column align-items-center">
-              <div class="card-img">
-                <img class="img-product" :src="product.image.url" alt="">
-              </div>
-              <div class="product-name">{{ product.name }}</div>
-              <div class="card-body pt-5">
-                <div class="d-flex align-items-center price">
-                  <div class="font-weight-bold">
-                    {{ (product.price).toLocaleString('en-US', { style: 'currency', currency: 'VND' }) }}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> -->
       </div>
     </div>
   </div>
@@ -166,13 +145,6 @@
                   <span class="sr-only">Next</span>
                 </a>
               </div>
-
-              <!-- <div class="modal-header">
-                <div class="about__product text-center"><img v-if="this.element.image.url != undefined"
-                    :src="`${this.element.image.url}`">
-                </div>
-              </div> -->
-
             </div>
             <div class="col-6">
               <div class="modal-header">
@@ -205,11 +177,6 @@
                         <b><span><input class="" style="text-align: right;" type="number" disabled
                               :value="TTien(this.cart.idProduct_item[0].quantity, this.element.price)"></span></b>
                       </div>
-                      <!-- <div class=" d-flex justify-content-between total font-weight-bold mt-4">
-                        <span class="bt-gia">Thành tiền</span> <span class="bt-gia"><input class="number_TT" type="radio"
-                            checked :value="TTien(this.cart.idProduct_item[0].quantity, this.element.price)"
-                            v-model="this.money"></span>
-                      </div> -->
                     </div>
                   </div>
                 </div>
@@ -265,7 +232,7 @@ export default {
   },
 
   created() {
-    // console.log(this.totalPages);
+
     this.IDcart = JSON.parse(localStorage.getItem('cart'));
     axios.get(`http://localhost:3000/api/picture/stored`)
       .then(res => {

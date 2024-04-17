@@ -242,7 +242,7 @@ onMounted(() => {
   min-height: 100px;
   /* width: 1150px; */
   background-color: #535353;
-  margin-top: 40px;
+  margin-top: 20px;
   color: white;
 }
 .abc {

@@ -10,9 +10,10 @@
                     <th scope="col">TT</th>
                     <th scope="col">Tên danh mục</th>
                     <th scope="col">Số lượng sản phẩm</th>
-                    <!-- <th scope="col">Sửa</th> -->
                     <th scope="col">Xóa</th>
-                    <th><CreateProductPortfolio></CreateProductPortfolio></th>
+                    <th>
+                        <CreateProductPortfolio></CreateProductPortfolio>
+                    </th>
                 </tr>
             </thead>
             <tbody class="text-center" v-if="this.danhmuc.length == 0">
@@ -28,7 +29,7 @@
                 <tr>
                     <th scope="row">{{ index + 1 }}</th>
                     <td>{{ item.nameDM }}</td>
-                    <td>{{ item.idProduct.length }}</td>
+                    <td>{{ countSimilar(item.nameDM) }}</td>
                     <!-- <td><i class="fas fa-edit edit-i"></i></td> -->
                     <td><i @click="e => { deleteTH(item._id) }" class="fas fa-trash-alt delete-i"></i></td>
                 </tr>
@@ -48,11 +49,34 @@ export default {
     data() {
         return {
             danhmuc: [],
-            id: ''
+            id: '',
+            genList: []
 
         }
     },
     created() {
+        // Lấy danh sách sản phẩm từ backend
+        axios.get(`http://localhost:3000/api/picture/stored`)
+            .then(res => {
+                // Lưu danh sách sản phẩm vào biến product
+                this.product = res.data;
+
+                // Khai báo một mảng để lưu giá trị gen từ các sản phẩm
+                let genList = [];
+
+                // Lặp qua từng sản phẩm trong danh sách sản phẩm
+                this.product.forEach(item => {
+                    // Lấy giá trị của gen từ sản phẩm hiện tại và thêm vào danh sách
+                    genList = genList.concat(item.gen);
+                });
+
+                // Gán danh sách genList vào biến genList trong data
+                this.genList = genList;
+            })
+            .catch(err => {
+                console.log(err);
+            });
+
         axios.get(`http://localhost:3000/api/danhmuc/stored`, {
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('Token')}`, // Đính kèm Token vào tiêu đề
@@ -67,10 +91,16 @@ export default {
     },
 
     methods: {
-        copyID(e) {
-            this.id = e
-            console.log(e);
+        countSimilar(nameDM) {
+        // Lọc ra các phần tử có giá trị giống với nameDM trong danh sách genList
+        const similarItems = this.genList.filter(gen => gen === nameDM);
+        // Đếm số lượng phần tử đã lọc được
+        return similarItems.length;
         },
+        // copyID(e) {
+        //     this.id = e
+        //     console.log(e);
+        // },
 
         deleteTH(e) {
             axios.delete(`http://localhost:3000/api/danhmuc/delete/${e}`)
@@ -90,16 +120,18 @@ export default {
     display: flex;
     height: 700px;
     flex-direction: column;
-    align-items: center; /* Căn giữa theo chiều ngang */
+    align-items: center;
+    /* Căn giữa theo chiều ngang */
 
 }
-.headanhmuc{
+
+.headanhmuc {
     text-align: center;
     position: relative;
     height: 100px;
     /* width: 1150px; */
     background-color: #535353;
-    margin-top: 40px;
+    margin-top: 20px;
     color: white;
 }
 
@@ -108,11 +140,12 @@ export default {
     cursor: pointer;
 }
 
-.abc{
+.abc {
     position: relative;
     top: 30px;
 }
-.table{
+
+.table {
     position: relative;
     border: 2px solid rgb(213, 213, 213);
 

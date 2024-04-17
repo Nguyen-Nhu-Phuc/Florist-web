@@ -126,7 +126,7 @@ export default {
     height: 100px;
     /* width: 1150px; */
     background-color: #535353;
-    margin-top: 40px;
+    margin-top: 20px;
     color: white;
 }
 .list__title--users{

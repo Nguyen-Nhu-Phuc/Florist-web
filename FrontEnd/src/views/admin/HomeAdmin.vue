@@ -1,7 +1,6 @@
 <template>
     <headerAdmin></headerAdmin>
 
-
     <div class="container-fluid">
         <div class="panel">
             <div class="panel-heading">
@@ -39,9 +38,7 @@
                             <td>{{ index + 1 }}</td>
                             <td>{{ item.name }}</td>
                             <td>{{ item.address }}</td>
-                            <td>{{ (item.price).toLocaleString('en-US', { style: 'currency', currency: 'VND' })
-                                }}
-                            </td>
+                            <td>{{ (item.price).toLocaleString('vi-VN') }} VND</td>
                             <td>{{ item.Quantity }}</td>
                             <td v-if="item.image != undefined"><img class="img-item" :src="`${item.image.url}`"
                                     alt="Ảnh minh họa"></td>
@@ -146,31 +143,42 @@
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLongTitle">Tshoes</h5>
+                                <h5 class="modal-title" id="exampleModalLongTitle">Huang</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
+
                             <div class="modal-body">
                                 <form @submit.prevent="updateProduct(this.product._id)">
                                     <div class="card-details">
                                         <h3 class="title">Chỉnh sửa thông tin</h3>
                                         <div class="row">
+
+                                            <div class="col-2">
+                                                    <label for="gen">Chọn Danh mục:</label>
+                                                    <div v-for="(item, index) in Danhmuc" :key="index">                                                                                                        
+                                                        <input type="checkbox" :id="index + 'ascsc'" name="vehicle1"
+                                                             @change="(e) => { inputChange(e, item._id, item.nameDM) }" v-model="this.product.gen" :value="item.nameDM">
+                                                        <label :for="index + 'ascsc'"> {{ item.nameDM }}</label><br>
+                                                    </div>
+                                                </div>
+
                                             <div class="form-group col-sm-7">
                                                 <label for="add">Thương hiệu</label>
                                                 <div class="input-group expiration-date ">
-                                                    <select disabled class="form-control select-TH" name="" id="add"
+                                                    <select class="form-control select-TH" name="add" id="add"
                                                         v-model="this.product.address" required="true">
-                                                        <option disabled selected value="">Chọn danh mục
+                                                        <option disabled selected value="">Chọn thương hiệu
                                                         </option>
                                                         <option v-for="(item, index) in this.thuonghieu" :key="index"
-                                                            :value="`${item.nameTH}`">
+                                                            :value="item.nameTH">
                                                             {{ item.nameTH }}
-
                                                         </option>
                                                     </select>
                                                 </div>
                                             </div>
+
                                             <div class="form-group col-sm-5">
                                                 <label for="prices">Giá gốc</label>
                                                 <div class="input-group expiration-date">
@@ -338,7 +346,6 @@ export default {
         },
 
         getOneProduct(id) {
-            // this.product.price = this.priceSum(this.product.priceR, this.product.discount)
             axios.get(`http://localhost:3000/api/picture/product/${id}`)
                 .then(res => {
                     this.product = res.data
@@ -349,7 +356,7 @@ export default {
         },
 
         async upLoadFiles() {
-            const fileInput = this.$refs.imageInput; // Lấy tham chiếu của đối tượng input file
+            const fileInput = this.$refs.imageInput;
 
             if (fileInput.files.length > 0) {
                 const file = fileInput.files[0];
@@ -383,26 +390,64 @@ export default {
             }
         },
 
+
         async updateProduct(id) {
-            await this.upLoadFiles()
+            await this.upLoadFiles(); // Tải lên hình ảnh mới
             const dataItem = {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('Token')}`, // Đính kèm Token vào tiêu đề
                 },
                 product: this.product,
                 gia: this.gia
-            }
-            console.log(this.gia);
-            axios.put(`http://localhost:3000/api/picture/update/${id}`, dataItem)
-                .then(() => {
-                    alert('Cập nhật thành công')
-                    window.location.reload()
-                })
-                .catch(err => {
+            };
+            const oldBrand = this.thuonghieu.find(brand => brand.idProduct.includes(id) && brand.nameTH !== this.product.address);
+            // Kiểm tra xem sản phẩm đã được chuyển sang thương hiệu mới hay không
+            if (this.product.thươnghieu !== oldBrand) {
+                axios.put(`http://localhost:3000/api/picture/update/${id}`, dataItem)
+                alert('Cập nhật thành công');
+                // Nếu sản phẩm đã chuyển sang thương hiệu mới
+                const newBrand = this.thuonghieu.find(brand => brand.nameTH === this.product.address);
+
+                newBrand.idProduct.push(id);
+
+                axios.put(`http://localhost:3000/api/thuonghieu/update/${newBrand._id}`, newBrand, {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('Token')}`
+                    }
+                });
+
+                const oldBrand = this.thuonghieu.find(brand => brand.idProduct.includes(id) && brand.nameTH !== this.product.address);
+
+                const updatedBrandData = {
+                    ...oldBrand,
+                    idProduct: oldBrand.idProduct.filter(productId => productId !== id)
+                };
+                axios.put(`http://localhost:3000/api/thuonghieu/update/${oldBrand._id}`, updatedBrandData, {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('Token')}`
+                    }
+                }).then(() => {
+                    window.location.reload();
+                }).catch(err => {
                     console.log(err);
-                })
-        }
+                });
+
+            }
+            else {
+
+                axios.put(`http://localhost:3000/api/picture/update/${id}`, dataItem)
+                    .then(() => {
+                        alert('Cập nhật thành công');
+                        window.location.reload();
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    });
+            }
+
+        },
     },
+    
 
     async created() {
         await this.fetchData();
@@ -635,7 +680,6 @@ export default {
 }
 
 .item-admin {
-
     margin-top: 20px;
     padding: 20px;
     width: 200px;
@@ -690,6 +734,7 @@ export default {
 }
 
 .abc {
+    text-align: center;
     position: relative;
     top: 15px;
 }

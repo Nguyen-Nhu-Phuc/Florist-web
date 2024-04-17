@@ -36,10 +36,12 @@
                                                         class="form-control option-TH">--Chọn loại hoa--</div>
                                                     <div class="dropdown-content">
                                                         <div v-for="(item, index) in this.thuonghieu" :key="index">
-                                                            <label class="mr-3 form-control form-TH" :for="index + 'as'">{{
-                                                                item.nameTH }}</label>
-                                                            <input class="input-TH" @click="copyID(item._id)" type="radio"
-                                                                :id="index + 'as'" :value="`${item.nameTH}`"
+                                                            <label class="mr-3 form-control form-TH"
+                                                                :for="index + 'as'">{{
+                                                                    item.nameTH }}</label>
+                                                            <input class="input-TH" @click="copyID(item._id)"
+                                                                type="radio" :id="index + 'as'"
+                                                                :value="`${item.nameTH}`"
                                                                 v-model="this.pictures.address">
                                                         </div>
                                                     </div>
@@ -48,15 +50,16 @@
                                             <div class="form-group col-sm-5">
                                                 <label for="prices">Giá</label>
                                                 <div class="input-group expiration-date">
-                                                    <input type="number" class="form-control" placeholder="VNĐ" id="prices"
-                                                        v-model="this.pictures.priceR" required="true">
+                                                    <input type="number" class="form-control" placeholder="VNĐ"
+                                                        id="prices" v-model="this.pictures.priceR" required="true">
                                                 </div>
                                             </div>
                                             <div class="form-group col-sm-5">
                                                 <label for="prices">Giảm giá</label>
                                                 <div class="input-group expiration-date">
                                                     <input type="number" max="100" min="0" class="form-control"
-                                                        placeholder="Tỉ lệ %" id="prices" v-model="this.pictures.discount">
+                                                        placeholder="Tỉ lệ %" id="prices"
+                                                        v-model="this.pictures.discount">
                                                 </div>
                                             </div>
                                             <div class="form-group col-sm-5">
@@ -81,13 +84,13 @@
                                             </div>
                                             <div class="form-group col-sm-4">
                                                 <label for="cvc">Số lượng</label>
-                                                <input id="cvc" min="1" type="number" class="form-control" placeholder="SL"
-                                                    v-model="this.pictures.Quantity" required="true">
+                                                <input id="cvc" min="1" type="number" class="form-control"
+                                                    placeholder="SL" v-model="this.pictures.Quantity" required="true">
                                             </div>
                                             <div class="form-group col-sm-8">
                                                 <label for="image">Ảnh minh họa</label>
-                                                <input type="file" class="form-control" id="image" multiple ref="imageInput"
-                                                    required="true">
+                                                <input type="file" class="form-control" id="image" multiple
+                                                    ref="imageInput" required="true">
                                             </div>
                                             <div class="form-group col-sm-4">
                                                 <label for="gen">Danh mục</label>
@@ -98,8 +101,9 @@
                                                 </div>
                                             </div>
                                             <div class="form-group col-sm-12">
-                                                <button class="btn btn-primary btn-block">Thêm sản phẩm</button>
-                                                
+                                                <button class="btn btn-primary btn-block"
+                                                    @click="addProductAndReload()">Thêm sản phẩm</button>
+
                                             </div>
                                         </div>
                                     </div>
@@ -111,26 +115,22 @@
             </div>
         </div>
     </div>
+
+
 </template>
 
 <script>
 import axios from 'axios'
 export default {
-
     data() {
         return {
             thuonghieuid: '',
-            thuonghieu: [
-                {
-                    nameTH: ''
-                }
-            ],
-
-            Danhmuc: [
-                {
-                    nameDM: ''
-                }
-            ],
+            thuonghieu: [{
+                nameTH: ''
+            }],
+            Danhmuc: [{
+                nameDM: ''
+            }],
             pictures: {
                 gen: [],
                 price: null,
@@ -147,23 +147,21 @@ export default {
             lists: []
         };
     },
-
     created() {
-
         axios.get(`http://localhost:3000/api/thuonghieu/stored`)
             .then(res => {
                 this.thuonghieu = res.data
             })
             .catch(err => {
                 console.log(err);
-            })
+            });
         axios.get(`http://localhost:3000/api/danhmuc/stored`)
             .then(res => {
                 this.Danhmuc = res.data
             })
             .catch(err => {
                 console.log(err);
-            })
+            });
     },
     methods: {
         inputChange(e, id, name) {
@@ -171,18 +169,17 @@ export default {
             if (this.lists.includes(id) == true && e.target.checked == false) {
                 let newList = this.lists.filter((idDanhMuc) => {
                     return idDanhMuc != id
-                })
+                });
                 this.lists = newList
                 let newname = this.pictures.gen.filter((nameDanhMuc) => {
                     return nameDanhMuc != name
-                })
+                });
                 this.pictures.gen = newname
             }
             if (this.lists.includes(id) == false && e.target.checked == true) {
                 this.lists.push(id)
                 this.pictures.gen.push(name)
             }
-
         },
         async upLoadFiles() {
             const file = await document.getElementById('image').files[0]
@@ -196,7 +193,6 @@ export default {
 
                 formData.append("upload_preset", PRESET_NAME);
                 formData.append("folder", FOLDER_NAME);
-
                 formData.append("file", file);
 
                 const response = await axios.post(api, formData, {
@@ -210,52 +206,71 @@ export default {
                 }
             }
         },
-
         copyID(e) {
             console.log(e);
             this.thuonghieuid = e
         },
-
         async addProduct() {
             await this.upLoadFiles();
-            this.pictures.price = this.priceSum(this.pictures.priceR, this.pictures.discount)
+            this.pictures.price = this.priceSum(this.pictures.priceR, this.pictures.discount);
             const dataItem = {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('Token')}`, // Đính kèm Token vào tiêu đề
                 },
                 product: this.pictures,
                 idTH: this.thuonghieuid,
-                listsDM: this.lists, 
+                listsDM: this.lists,
                 nameDanhMuc: this.pictures.gen
-            }
+            };
+
             axios.post('http://localhost:3000/api/picture/add', dataItem)
                 .then(res => {
-                    window.alert("Thêm sản phẩm mới thành công")
-                    // this.pictures.gen = "";
-                    this.pictures.address = "";
-                    this.pictures.price = "";
-                    this.pictures.name = "";
-                    this.pictures.priceR = "";
-                    this.pictures.discount = "";
-                    this.pictures.image = "";
-
-                }).catch(err => console.log(err))
+                    window.alert("Thêm sản phẩm mới thành công");
+                    // Làm mới form
+                    this.pictures = {
+                        gen: [],
+                        price: null,
+                        address: null,
+                        discount: null,
+                        priceR: null,
+                        name: null,
+                        Quantity: null,
+                        image: {
+                            id: '',
+                            url: ''
+                        }
+                    };
+                    // Tải lại trang
+                    window.location.reload();
+                })
+                .catch(err => console.log(err));
         },
-
         priceSum(a, b) {
             if (b == undefined) {
                 return a
             }
             let s = a * (b / 100)
             return a - s
-
+        },
+        // Reset form fields
+        resetForm() {
+            this.pictures.address = "";
+            this.pictures.price = "";
+            this.pictures.name = "";
+            this.pictures.priceR = "";
+            this.pictures.discount = "";
+            this.pictures.image = "";
+        },
+        // Thêm sản phẩm và tải lại trang
+        async addProductAndReload() {
+            await this.addProduct(); // Gọi hàm thêm sản phẩm đã có sẵn
+            // Sau khi thêm sản phẩm, tải lại trang
+            window.location.reload();
         }
-
-
     }
-
 }
 </script>
+
 
 <style scoped>
 .ip-price {
@@ -299,7 +314,7 @@ export default {
 }
 
 .modal-dialog {
-    max-width: 50%;
+    /* max-width: 50%; */
     margin: 1.75rem auto;
 }
 
@@ -310,7 +325,7 @@ export default {
 .item-admin {
     /* margin-top: -18px; */
     position: relative;
-    margin-left: 760px;
+    margin-left: 1000px;
     padding: 5px;
     background-color: rgb(69, 63, 63);
     border-radius: 5px;
@@ -371,7 +386,7 @@ export default {
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.075);
     background-color: #ffffff;
     padding: 0;
-    max-width: 600px;
+    /* max-width: 600px; */
     margin: auto;
 }
 
