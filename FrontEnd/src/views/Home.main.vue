@@ -53,17 +53,17 @@
         <div class="brands__container container">
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
-                    <img src="" alt="">
+                    <img src="../" alt="">
                 </div>
             </div>
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
-                    
-                </div>
+
+                </div>ll
             </div>
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
-                    
+
                 </div>
             </div>
         </div>

@@ -1,0 +1,108 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - mood_great
+  - bot_challenge
+  - flower_types
+  - flower_recommendation
+  - flower_price
+  - flower_delivery
+  - flower_occasions
+  - flower_care
+  - flower_customization
+  - flower_availability
+  - flower_quantity
+  - flower_color
+  - flower_seasonal
+
+responses:
+  
+  utter_greet:
+  - text: "Chào bạn! Chúng tôi rất vui khi bạn ghé thăm cửa hàng hoa của chúng tôi. Có gì chúng tôi có thể giúp bạn không?"
+  - text: "Xin chào! Chào mừng bạn đến với cửa hàng hoa của chúng tôi. Bạn có cần sự hỗ trợ nào không?"
+  - text: "Heyy! Chúng tôi luôn sẵn lòng phục vụ bạn. Bạn muốn tìm loại hoa nào hôm nay?"
+
+  utter_affirm:
+  - text: "Đúng vậy, chúng tôi luôn sẵn lòng hỗ trợ bạn."
+  - text: "Vâng, chúng tôi chắc chắn có thể giúp bạn tìm thấy những bó hoa hoàn hảo."
+  - text: "Đúng vậy, chúng tôi sẽ cố gắng hết sức để đáp ứng nhu cầu của bạn."
+
+  utter_goodbye:
+  - text: "Tạm biệt bạn! Hẹn gặp lại lần sau và chúc bạn một ngày vui vẻ!"
+  - text: "Chào tạm biệt! Đừng ngần ngại quay lại nếu bạn có bất kỳ câu hỏi nào khác."
+  - text: "Hẹn gặp lại bạn sau! Chúc bạn có một ngày thật tuyệt vời!"
+
+  utter_iamabot:
+  - text: "I am a bot, powered by Rasa."
+
+  utter_mood_great:
+  - text: "Rất vui khi bạn cảm thấy tốt lành! Chúng tôi hy vọng sẽ giúp bạn tìm thấy những bó hoa hoàn hảo."
+  - text: "Rất vui khi bạn cảm thấy tốt lành! Chúng tôi hy vọng sẽ giúp bạn tìm thấy những bó hoa hoàn hảo."
+  - text: "Đó là tin tốt! Hy vọng bạn sẽ tìm thấy những bó hoa ưng ý tại cửa hàng của chúng tôi."
+  - text: "Tuyệt vời! Chúng tôi rất vui khi biết bạn hài lòng với dịch vụ của chúng tôi."
+
+
+  utter_flower_types:
+  - text: "Chúng tôi có một loạt các loại hoa đa dạng như hoa hồng, hoa lan, hoa cúc, hoa lily và nhiều loại hoa khác nữa."
+  - text: "Danh sách các loại hoa mà chúng tôi cung cấp bao gồm hoa hồng, hoa cúc, hoa lan, hoa tulip và nhiều hơn nữa."
+  - text: "Tại cửa hàng của chúng tôi, bạn có thể tìm thấy nhiều loại hoa phong phú như hoa hồng, hoa lan, hoa cúc và hoa iris."
+
+  utter_flower_recommendation:
+  - text: "Dĩ nhiên, chúng tôi rất vui được giúp bạn chọn loại hoa phù hợp cho dịp đặc biệt của bạn. Vui lòng cho chúng tôi biết về sở thích hoặc mục đích của bạn, và chúng tôi sẽ đề xuất các loại hoa phù hợp nhất."
+  - text: "Tất nhiên, chúng tôi có thể gợi ý cho bạn một số loại hoa phổ biến như hoa hồng, hoa cúc, hoa lan, hoa hướng dương, và nhiều loại hoa khác. Bạn có thể cung cấp thêm thông tin về dịp đặc biệt hoặc sở thích của người nhận, để chúng tôi có thể đề xuất các lựa chọn phù hợp nhất."
+  - text: "Tất nhiên, chúng tôi có thể giúp bạn tìm ra loại hoa tốt nhất cho dịp đặc biệt của bạn. Hãy cho chúng tôi biết về sở thích hoặc yêu cầu cụ thể của bạn, và chúng tôi sẽ đưa ra các gợi ý phù hợp nhất."
+  
+  utter_flower_price:
+  - text: "Giá của các loại hoa tại cửa hàng của chúng tôi phụ thuộc vào loại và kích thước. Bạn muốn biết về giá của loại hoa cụ thể nào?"
+  - text: "Chúng tôi có một loạt các mức giá cho các loại hoa khác nhau, bắt đầu từ mức giá phổ biến đến những lựa chọn cao cấp. Bạn có thể yên tâm chọn lựa một sản phẩm phù hợp với ngân sách của bạn."
+  - text: "Để biết thông tin về giá cả, bạn có thể truy cập trực tiếp vào trang web của chúng tôi hoặc liên hệ với cửa hàng để được tư vấn chi tiết về giá cả của các loại hoa bạn quan tâm."
+  
+  utter_flower_delivery:
+  - text: "Chúng tôi cung cấp dịch vụ giao hoa tận nơi để đảm bảo bạn nhận được sản phẩm trong thời gian ngắn nhất. Bạn chỉ cần cung cấp địa chỉ và thời gian giao hàng, và chúng tôi sẽ xử lý mọi thứ còn lại."
+  - text: "Có, chúng tôi cung cấp dịch vụ giao hoa tận nơi. Bạn chỉ cần cung cấp địa chỉ và thông tin liên lạc của người nhận, và chúng tôi sẽ giao hoa đến tận cửa nhà họ."
+  - text: "Để biết thông tin chi tiết về dịch vụ giao hoa của chúng tôi, bạn có thể truy cập trực tiếp vào trang web của chúng tôi hoặc liên hệ với cửa hàng để được hỗ trợ."
+  
+  utter_flower_occasions:
+  - text: "Dĩ nhiên, chúng tôi có thể giúp bạn chọn loại hoa phù hợp cho mọi dịp đặc biệt như đám cưới, sinh nhật, kỷ niệm, lễ tốt nghiệp, Valentine, và tang lễ. Hãy cho chúng tôi biết về dịp cụ thể bạn quan tâm, và chúng tôi sẽ đề xuất các lựa chọn phù hợp nhất."
+  - text: "Chúng tôi có một loạt các loại hoa được chọn lọc kỹ lưỡng để phù hợp với mọi dịp đặc biệt như đám cưới, sinh nhật, kỷ niệm, lễ tốt nghiệp và Valentine. Hãy cho chúng tôi biết về dịp mà bạn muốn tìm kiếm, và chúng tôi sẽ đề xuất các lựa chọn thích hợp nhất cho bạn."
+  - text: "Với sự đa dạng của chúng tôi, chúng tôi tự tin rằng bạn sẽ tìm thấy loại hoa phù hợp cho mọi dịp đặc biệt. Hãy cho chúng tôi biết về dịp cụ thể bạn quan tâm, và chúng tôi sẽ giúp bạn tìm kiếm sản phẩm hoàn hảo nhất."
+  
+  utter_flower_care:
+  - text: "Để giữ cho hoa tươi lâu, bạn nên cắt ngắn đáy của cành hoa và thay nước trong bình hàng ngày. Đặt bình hoa ở nơi mát mẻ và tránh ánh nắng trực tiếp. Bạn cũng có thể sử dụng chất dinh dưỡng cho hoa để giữ cho chúng tươi lâu hơn."
+  - text: "Chăm sóc hoa đơn giản bao gồm việc thay nước định kỳ, cắt cành hoa một cách ngắn gọn và đặt bình hoa ở nơi thoáng mát. Hãy tránh để hoa tiếp xúc trực tiếp với ánh nắng mặt trời và giữ cho môi trường xung quanh hoa luôn sạch sẽ."
+  - text: "Để giữ cho hoa tươi lâu, hãy đảm bảo rằng bạn thay nước trong bình hàng ngày và cắt ngắn cành hoa mỗi khi thay nước. Bảo quản hoa ở nơi mát mẻ và tránh ánh nắng trực tiếp sẽ giúp hoa giữ được sức sống lâu hơn."
+  
+  utter_flower_customization:
+  - text: "Chắc chắn, chúng tôi có thể đáp ứng mọi yêu cầu của bạn để tạo ra một bó hoa độc đáo và đẹp mắt. Hãy cho chúng tôi biết về ý tưởng của bạn hoặc yêu cầu cụ thể, và chúng tôi sẽ tạo ra một sản phẩm đặc biệt chỉ cho bạn."
+  - text: "Với khả năng tùy chỉnh của chúng tôi, bạn có thể yên tâm rằng chúng tôi sẽ tạo ra một bó hoa độc đáo và phản ánh đúng ý tưởng của bạn. Hãy liên hệ với chúng tôi để chia sẻ ý tưởng và yêu cầu của bạn, và chúng tôi sẽ tạo ra một sản phẩm tuyệt vời."
+  - text: "Với dịch vụ tùy chỉnh của chúng tôi, bạn có thể yên tâm rằng bó hoa của bạn sẽ được tạo ra theo ý tưởng và sở thích của riêng bạn. Hãy nói cho chúng tôi biết về yêu cầu của bạn và chúng tôi sẽ tạo ra một sản phẩm độc đáo và đẹp mắt."
+  
+  utter_flower_availability:
+  - text: "Để biết về sự có sẵn của các loại hoa cụ thể, bạn có thể truy cập trực tiếp vào trang web của chúng tôi hoặc liên hệ với cửa hàng để được thông tin cập nhật về tình trạng tồn kho."
+  - text: "Chúng tôi luôn cập nhật tình trạng có sẵn của các loại hoa để đảm bảo rằng bạn có thể lựa chọn từ một loạt các sản phẩm đa dạng. Hãy liên hệ với chúng tôi để biết thông tin chi tiết về sự có sẵn của các loại hoa bạn quan tâm."
+  - text: "Sự có sẵn của các loại hoa có thể thay đổi theo mùa và tình trạng tồn kho, vì vậy để biết thông tin cập nhật về sản phẩm hiện có, hãy liên hệ với chúng tôi trực tiếp hoặc truy cập vào trang web của chúng tôi."
+
+  utter_flower_quantity:
+  - text: "Chúng tôi có thể tư vấn cho bạn về số lượng hoa phù hợp cho bó hoa của bạn dựa trên kích thước và mục đích sử dụng. Hãy cho chúng tôi biết về kích thước và dịp sử dụng, và chúng tôi sẽ giúp bạn lựa chọn số lượng phù hợp nhất."
+  - text: "Dĩ nhiên, chúng tôi có thể tư vấn cho bạn về số lượng hoa phù hợp cho bó hoa của bạn, dựa trên mục đích và phong cách của bó hoa. Hãy cho chúng tôi biết yêu cầu cụ thể của bạn và chúng tôi sẽ giúp bạn chọn số lượng phù hợp nhất."
+  - text: "Để biết thông tin chi tiết về số lượng hoa phù hợp cho bó hoa của bạn, hãy liên hệ với chúng tôi trực tiếp để được tư vấn chi tiết và chính xác nhất."
+  
+  utter_flower_color:
+  - text: "Chúng tôi có một loạt các loại hoa có màu sắc đa dạng từ màu đỏ, hồng, trắng, và các gam màu pastel. Hãy cho chúng tôi biết màu sắc bạn quan tâm, và chúng tôi sẽ giúp bạn tìm kiếm loại hoa phù hợp nhất."
+  - text: "Với sự đa dạng của chúng tôi, bạn có thể tìm thấy một loạt các loại hoa có màu sắc từ tươi sáng đến dịu dàng. Hãy cho chúng tôi biết màu sắc mà bạn quan tâm, và chúng tôi sẽ giúp bạn lựa chọn loại hoa phù hợp nhất."
+  - text: "Chúng tôi có nhiều lựa chọn về màu sắc cho các loại hoa, từ các màu sắc cơ bản như đỏ, hồng và trắng đến các gam màu pastel và màu sắc đặc biệt. Hãy cho chúng tôi biết về sở thích của bạn và chúng tôi sẽ đề xuất các lựa chọn phù hợp nhất."
+  
+  
+  utter_flower_seasonal:
+  - text: "Đối với hoa mùa xuân, chúng tôi có sẵn các loại hoa như hoa anh đào, hoa tulip và hoa cẩm tú cầu. Đây là những lựa chọn hoàn hảo để tạo ra các bó hoa tươi sáng và đầy màu sắc."
+  - text: "Trong mùa hè, chúng tôi cung cấp các loại hoa như hoa hướng dương, hoa cúc và hoa lavender. Những loại hoa này mang lại cảm giác tươi mới và sự sảng khoái cho bất kỳ dịp nào."
+  - text: "Với mùa thu, chúng tôi có sẵn hoa cúc, hoa dahlia và hoa hồng mùa thu, là những loại hoa ấm áp và lãng mạn, phù hợp cho các buổi tiệc và sự kiện trong mùa này."
+  - text: "Và vào mùa đông, bạn có thể lựa chọn từ các loại hoa như hoa lily, hoa nguyệt quế và hoa giấy trắng để tạo ra các bó hoa trang trí cho những buổi tiệc đầy ấm áp và sang trọng."
+
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

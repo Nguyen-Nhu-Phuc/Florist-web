@@ -79,6 +79,33 @@
             </div>
           </div>
         </div>
+
+
+        <button class="chatBtn" @click="toggleChat">
+          <svg height="1.6em" fill="white" xml:space="preserve" viewBox="0 0 1000 1000" y="0px" x="0px" version="1.1">
+            <path
+              d="M881.1,720.5H434.7L173.3,941V720.5h-54.4C58.8,720.5,10,671.1,10,610.2v-441C10,108.4,58.8,59,118.9,59h762.2C941.2,59,990,108.4,990,169.3v441C990,671.1,941.2,720.5,881.1,720.5L881.1,720.5z M935.6,169.3c0-30.4-24.4-55.2-54.5-55.2H118.9c-30.1,0-54.5,24.7-54.5,55.2v441c0,30.4,24.4,55.1,54.5,55.1h54.4h54.4v110.3l163.3-110.2H500h381.1c30.1,0,54.5-24.7,54.5-55.1V169.3L935.6,169.3z M717.8,444.8c-30.1,0-54.4-24.7-54.4-55.1c0-30.4,24.3-55.2,54.4-55.2c30.1,0,54.5,24.7,54.5,55.2C772.2,420.2,747.8,444.8,717.8,444.8L717.8,444.8z M500,444.8c-30.1,0-54.4-24.7-54.4-55.1c0-30.4,24.3-55.2,54.4-55.2c30.1,0,54.4,24.7,54.4,55.2C554.4,420.2,530.1,444.8,500,444.8L500,444.8z M282.2,444.8c-30.1,0-54.5-24.7-54.5-55.1c0-30.4,24.4-55.2,54.5-55.2c30.1,0,54.4,24.7,54.4,55.2C336.7,420.2,312.3,444.8,282.2,444.8L282.2,444.8z">
+            </path>
+          </svg>
+          <span class="tooltip">Chat</span>
+        </button>
+
+        <div class="chat-card" id="app" v-show="showChat">
+          <div class="chat-header">
+            <div class="h2">Huang</div>
+          </div>
+          <div class="chat-body">
+            <div v-for="(message, index) in messages" :key="index"
+              :class="message.sender === 'user' ? 'message outgoing' : 'message incoming'">
+              <p>{{ message.text }}</p>
+            </div>
+          </div>
+          <div class="chat-footer">
+            <input v-model="userMessage" @keyup.enter="sendMessage" placeholder="Type your message" type="text">
+            <button @click="sendMessage">Send</button>
+          </div>
+        </div>
+
       </div>
       <div class="col-9">
 
@@ -195,12 +222,12 @@
 <script>
 import axios from 'axios';
 import Header from '../components/Header/Header.main.vue';
-import fotter from '../components/Footer/footer.vue';
+import Footer from '../components/Footer/footer.vue';
 
 export default {
   components: {
-    fotter,
-    Header
+    Header,
+    Footer
   },
   data() {
     return {
@@ -216,8 +243,8 @@ export default {
           }
         ]
       },
-      search: [],
-      search2: [],
+      search: '',
+      search2: '',
       product: [],
       id: '',
       gen: '',
@@ -227,112 +254,256 @@ export default {
         }
       },
       discount: '',
-
-    }
+      messages: [],
+      userMessage: '',
+      IDcart: null, // Khai báo biến IDcart để sử dụng trong created()
+      showChat: false // Thêm thuộc tính showChat vào data
+    };
   },
-
   created() {
-
     this.IDcart = JSON.parse(localStorage.getItem('cart'));
-    axios.get(`http://localhost:3000/api/picture/stored`)
-      .then(res => {
-        // if (this.selectedBrands.length === 0) {
-        // Nếu không có tên `nameTH` nào được chọn, hiển thị tất cả sản phẩm
-        this.product = res.data;
-        // } else {
-        // Nếu có tên `nameTH` được chọn, lọc danh sách sản phẩm theo tên `nameTH`
-        // this.product = res.data.filter(item => this.selectedBrands.includes(item.nameTH));
-        // }
-      })
-      .catch(err => {
-        console.log(err);
-      });
-    axios.get(`http://localhost:3000/api/thuonghieu/stored`)
-      .then(res => {
-        this.thuonghieu = res.data
-      })
-      .catch(err => {
-        console.log(err);
-      })
-    axios.get(`http://localhost:3000/api/danhmuc/stored`)
-      .then(res => {
-        this.danhmuc = res.data
-      })
-      .catch(err => {
-        console.log(err);
-      })
+    this.fetchData();
   },
-
   methods: {
+    async fetchData() {
+      try {
+        const [pictureResponse, thuonghieuResponse, danhmucResponse] = await Promise.all([
+          axios.get('http://localhost:3000/api/picture/stored'),
+          axios.get('http://localhost:3000/api/thuonghieu/stored'),
+          axios.get('http://localhost:3000/api/danhmuc/stored')
+        ]);
+        this.product = pictureResponse.data;
+        this.thuonghieu = thuonghieuResponse.data;
+        this.danhmuc = danhmucResponse.data;
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    },
     copyID(id) {
-      this.id = id
+      this.id = id;
       axios.get(`http://localhost:3000/api/picture/product/${this.id}`)
         .then(res => {
-          this.element = res.data
+          this.element = res.data;
         })
         .catch(err => {
-          console.log(err);
-        })
+          console.error('Error fetching product data:', err);
+        });
     },
-
+    async sendMessage() {
+      if (this.userMessage.trim() === '') return;
+      this.messages.push({ text: this.userMessage, sender: 'user' });
+      try {
+        const response = await axios.post('http://localhost:5005/webhooks/rest/webhook', {
+          message: this.userMessage
+        });
+        this.messages.push(...response.data.map(message => ({ text: message.text, sender: 'bot' })));
+      } catch (error) {
+        console.error('Error sending message:', error);
+      }
+      this.userMessage = '';
+    },
     addCart(id) {
-      this.cart.idProduct_item[0].id_item = this.id
+      this.cart.idProduct_item[0].id_item = this.id;
       const dataItem = {
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem('Token')}`, // Đính kèm Token vào tiêu đề
+          'Authorization': `Bearer ${localStorage.getItem('Token')}`
         },
-        product: this.cart,
-      }
-      console.log(dataItem);
+        product: this.cart
+      };
       axios.post(`http://localhost:3000/api/cart/add/${id}`, dataItem)
         .then(() => {
-          alert('Thêm vào giỏ hàng thành công')
+          alert('Thêm vào giỏ hàng thành công');
         })
         .catch(err => {
-          console.log(err);
-        })
+          console.error('Error adding to cart:', err);
+        });
     },
-
     TTien(a, b) {
-      if (a != undefined && b != undefined)
-        return a * b
+      if (a !== undefined && b !== undefined) {
+        return a * b;
+      }
     },
-
     checklogin() {
-      if (this.IDcart == undefined) {
-        alert('Bạn cần đăng nhập khi thêm vào giỏ hàng')
+      if (this.IDcart === undefined) {
+        alert('Bạn cần đăng nhập khi thêm vào giỏ hàng');
         this.$router.replace({ path: '/login' });
       }
-      return;
     },
-
+    toggleChat() {
+      this.showChat = !this.showChat;
+    }
   },
-
   mounted() {
-    document.addEventListener("DOMContentLoaded", function () {
-      $('#filterbar').collapse(true);
-      $('#inner-box').collapse(true);
-      $('#inner-box2').collapse(true);
-    });
+    $('#filterbar').collapse(true);
+    $('#inner-box').collapse(true);
+    $('#inner-box2').collapse(true);
   },
-
   computed: {
     filteredProducts() {
-      return this.product.filter((product) => {
-        const searchLower = this.search.toString().toLowerCase();
-        const searchLower2 = this.search2.toString().toLowerCase();
+      const searchLower = this.search.toLowerCase();
+      const searchLower2 = this.search2.toLowerCase();
+      return this.product.filter(product => {
         return (
           product.address && product.address.toLowerCase().includes(searchLower) &&
           (product.gen && product.gen.some(category => category.toLowerCase().includes(searchLower2)))
-
-        )
+        );
       });
     }
-  },
-}
+  }
+};
 </script>
 
+
+
 <style>
+/* =========================== */
+
+.chatBtn {
+  width: 55px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: none;
+  background-color: #FFE53B;
+  background-image: linear-gradient(147deg, #FFE53B, #FF2525, #FFE53B);
+  cursor: pointer;
+  padding-top: 3px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.164);
+  position: relative;
+  background-size: 300%;
+  background-position: left;
+  transition-duration: 1s;
+}
+
+.tooltip {
+  position: absolute;
+  top: -40px;
+  opacity: 0;
+  background-color: rgb(255, 180, 82);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition-duration: .5s;
+  pointer-events: none;
+  letter-spacing: 0.5px;
+}
+
+.chatBtn:hover .tooltip {
+  opacity: 1;
+  transition-duration: .5s;
+}
+
+.chatBtn:hover {
+  background-position: right;
+  transition-duration: 1s;
+}
+
+/* ============================= */
+.chat-card {
+  width: 300px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.chat-header {
+  padding: 10px;
+  background-color: #f2f2f2;
+  display: flex;
+  align-items: center;
+}
+
+.chat-header .h2 {
+  font-size: 16px;
+  color: #333;
+}
+
+.chat-body {
+  padding: 20px;
+}
+
+.message {
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.incoming {
+  background-color: #e1e1e1;
+}
+
+.outgoing {
+  background-color: #f2f2f2;
+  text-align: right;
+}
+
+.message p {
+  font-size: 14px;
+  color: #333;
+  margin: 0;
+}
+
+.chat-footer {
+  padding: 10px;
+  background-color: #f2f2f2;
+  display: flex;
+}
+
+.chat-footer input[type="text"] {
+  flex-grow: 1;
+  padding: 5px;
+  border: none;
+  border-radius: 3px;
+}
+
+.chat-footer button {
+  padding: 5px 10px;
+  border: none;
+  background-color: #4285f4;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.chat-footer button:hover {
+  background-color: #0f9d58;
+}
+
+@keyframes chatAnimation {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.chat-card .message {
+  animation: chatAnimation 0.3s ease-in-out;
+  animation-fill-mode: both;
+  animation-delay: 0.1s;
+}
+
+.chat-card .message:nth-child(even) {
+  animation-delay: 0.2s;
+}
+
+.chat-card .message:nth-child(odd) {
+  animation-delay: 0.3s;
+}
+
+
+/* ============================== */
 .modal-dialog {
   max-width: 100%;
 }

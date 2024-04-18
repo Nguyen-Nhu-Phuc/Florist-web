@@ -1,0 +1,61 @@
+version: "3.1"
+
+stories:
+
+- story: Huang
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: flower_types
+  - action: utter_flower_types
+  - intent: flower_recommendation
+  - action: utter_flower_recommendation
+  - intent: flower_price
+  - action: utter_flower_price
+  - intent: goodbye
+  - action: utter_goodbye
+
+- story: Huang 1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: flower_color
+  - action: utter_flower_color
+  - intent: flower_quantity
+  - action: utter_flower_quantity
+  - intent: flower_availability
+  - action: utter_flower_availability
+  - intent: flower_occasions
+  - action: utter_flower_occasions
+  - intent: goodbye
+  - action: utter_goodbye
+
+- story: Huang 2
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: affirm
+  - action: utter_affirm
+  - intent: flower_quantity
+  - action: utter_flower_quantity
+  - intent: flower_seasonal
+  - action: utter_flower_seasonal
+  - intent: flower_delivery
+  - action: utter_flower_delivery
+
+- story: Huang 3
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: flower_care
+  - action: utter_flower_care
+  - intent: mood_great
+  - action: utter_mood_great
+  - intent: flower_quantity
+  - action: utter_flower_quantity
+  - intent: flower_quantity
+  - action: utter_flower_quantity
+  - intent: flower_customization
+  - action: utter_flower_customization
+  - intent: goodbye
+  - action: utter_goodbye

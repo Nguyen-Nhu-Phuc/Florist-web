@@ -4,7 +4,7 @@
       <div class="footer__col">
         <div class="footer__logo">
           <h1>
-            <a href="./">huang.</a>
+            <a href="./home">huang.</a>
           </h1>
         </div>
         <div class="footer__description">

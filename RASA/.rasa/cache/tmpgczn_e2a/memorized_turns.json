@@ -1,0 +1,13 @@
+{
+  "lookup": {
+    "eJyLrq6NBQAEOAGx": "action_listen",
+    "eJyLrq7VUaguKEoti09MLsnMz7NSqIYw4vMSc1OtFKCcnMziktQ8oNrS4tQioJrMPCC3xEohvSg1taS2NhYA6dwbhQ==": "utter_greet",
+    "eJyLrq7VUaguKEoti09MLsnMz7NSqIYw4vMSc1OtFKCcnMziktQ8oNrS4tQioJrMPCC3xEohvSg1taSWgBmlJSWpRfEQpbhMiAUAQvc0lw==": "action_listen",
+    "eJyLrq7VUaguKEoti09MLsnMz7NSqIYw4vMSc1OtFKCcnMziktQ8oNrS4tQioJrMPCC3xEohvSg1taSWgBmlJSWpRfEQpeSZQMAVaTn55UAbSioLUotra2MB36BRdw==": "utter_flower_types",
+    "eJyLrq7VUaguKEoti09MLsnMz7NSqIYw4vMSc1OtFKCcnMziktQ8oNrS4tQioJrMPCC3xEohvSg1taSWgBmlJSWpRfEQpeSZQMAVaTn55UAbSioLUouJcwyKDgLmxQIALrFwoQ==": "action_listen",
+    "eJyljlEKgCAQRK/iATqBV4kQqSmEXGPdihDvnlE/fRX1twNv3k6dcqXSxFiMbcUF0iqdhyHrodUVRhcFVNg5ggvjqETRamBA8oNjFgGbE/1meFjRj2EtH2SbEN+NuTV++d5NY7TBe1BnDzrnZgdtBJEh": "utter_flower_recommendation",
+    "eJyljkEKhDAQBL+SB/iCfEUkBO2VgJnIZNxlCf7diF70YtTbNFT3VJ3mSqWR8TW2FRdIq7QdhqyHVnsYXBRQZqcIzoyjHEWrngGZLzYmEbDZ0GcLFxafIfzyB/mPiGUyh8arvTI1Rhu8B3V2pW85nqqlH5oFTqO3iw==": "action_listen",
+    "eJytjlEKwyAQRK/iAXICrxKCiJkWIa6yblqKePda0p/2J7bJ3w68mX1jqYMqiXEz1omPpFXZDkM2QKt3WHwWUGPXDG6MpxZFqysDUnc2VhGw2dD/FnYsLku8tw/ySMh9Mh+NQ3t9agwXQwDN9kX/5PhVPedDn3Vi71Dr9ARKVNRJ": "utter_flower_price",
+    "eJytjlEKwyAQRK/iAXoCrxKKiJ0WIa6yblqK5O61mJ/2R9Pmbwdm3r6prCdVEuNurBMfSavSDkM2QKstzD4LqHaXDK4dTzWKVjcGZO0wFhGwadXfCB2L6xwf9YM8E/KYzMfiL96YGsPFEEAX+27vcvyaHvNhzDqxd9gl2xYd3vkFd+fzLw==": "action_listen"
+  }
+}

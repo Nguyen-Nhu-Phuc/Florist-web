@@ -1,0 +1,144 @@
+version: "3.1"
+
+nlu:
+- intent: greet 
+  examples: |
+    - Chào bạn
+    - Xin chào
+    - Chào buổi sáng! 
+    - Chào buổi chiều!
+    - Hi
+    - Heyy
+    - Yo bro
+    - Chào mầy
+    - Ê
+    - Hú
+    - Alo
+    - Moshi
+    - Ui
+
+- intent: goodbye
+  examples: |
+    - Chào bạn tạm biệt
+    - Chúc bạn ngủ ngon
+    - Hẹn gặp lại
+    - Tạm biệt nhe
+    - bye 
+    - see you later
+
+- intent: affirm
+  examples: |
+    - Đúng vậy
+    - Vâng
+    - Đúng
+    - Chính xác
+    - Ừ
+    - Ừa
+    - Phải
+    - Yes
+    - 10
+
+- intent: mood_great
+  examples: |
+    - Tôi cảm thấy rất tuyệt vời khi được đến đây chọn hoa.
+    - Cảm ơn, tôi rất hạnh phúc vì tìm thấy những bó hoa tuyệt vời ở đây.
+    - Tôi cảm thấy rất vui vẻ khi được tham quan cửa hàng này.
+    - Tôi cảm thấy như mình đang ở trong một vườn hoa tuyệt vời khi đến đây.
+    - Mọi thứ ở đây đều tuyệt vời! Tôi rất hạnh phúc khi mua hoa ở đây.
+   
+
+- intent: bot_challenge
+  examples: |
+    - Bạn là một bot phải không?
+    - Tôi có đang nói chuyện với một trí não nhân tạo không?
+    - Bạn có phải là con bot đang phản hồi cho tôi không?
+    - Tôi nghĩ bạn là một chương trình máy tính đúng không?
+    - Bạn là một trí tuệ nhân tạo phải không?
+
+- intent: flower_types
+  examples: |
+    - Bạn có những loại hoa nào trong cửa hàng?
+    - Cho tôi xem các loại hoa bạn đang bán.
+    - Có những loại hoa gì đang được bày bán ở đây?
+    - Tôi muốn biết về các loại hoa bạn có.
+    - Cho tôi biết danh sách các loại hoa bạn cung cấp.
+    - Bạn có thể kể cho tôi nghe về các loại hoa bạn bán không?
+
+- intent: flower_recommendation
+  examples: |
+    - Bạn có thể gợi ý cho tôi loại hoa nào phù hợp cho dịp đặc biệt không?
+    - Tôi đang tìm kiếm loại hoa phù hợp cho buổi tiệc sinh nhật của bạn thân.
+    - Tôi cần một số gợi ý về loại hoa thích hợp cho ngày kỷ niệm.
+    - Bạn có thể giới thiệu cho tôi một số loại hoa đẹp để tặng cho mẹ vào dịp lễ mẹ không?
+    - Tôi đang muốn mua hoa làm quà tặng, bạn có thể giúp tôi chọn không?
+
+- intent: flower_price
+  examples: |
+    - Tôi muốn biết giá của các loại hoa bạn đang bán.
+    - Bạn có thể cho tôi biết giá cả của hoa hồng không?
+    - Tôi cần biết giá của bó hoa cúc trắng.
+    - Bạn có thể nói cho tôi biết giá cả của các loại hoa phổ biến không?
+    - Tôi muốn biết giá cả của bó hoa lớn nhất bạn có.
+
+- intent: flower_delivery
+  examples: |
+    - Bạn có dịch vụ giao hoa tận nơi không?
+    - Làm thế nào để đặt hàng và giao hoa cho người thân của tôi?
+    - Tôi muốn giao một bó hoa tới địa chỉ XYZ, có được không?
+    - Bạn giao hoa vào ngày cuối tuần không?
+    - Tôi cần dịch vụ giao hoa trong vòng hai giờ, bạn có thể làm được không?
+
+- intent: flower_occasions
+  examples: |
+    - Bạn có thể gợi ý cho tôi loại hoa phù hợp cho đám cưới không?
+    - Tôi đang tìm kiếm hoa phù hợp cho buổi tiệc tân gia, bạn có thể giúp tôi không?
+    - Cho tôi biết loại hoa thích hợp cho buổi lễ tốt nghiệp.
+    - Tôi muốn mua hoa để làm quà cho ngày Valentine, bạn có thể gợi ý cho tôi không?
+    - Bạn có thể tư vấn về loại hoa phù hợp cho tang lễ không?
+
+- intent: flower_care
+  examples: |
+    - Làm thế nào để chăm sóc hoa hồng sau khi mua về?
+    - Bạn có thể cho tôi biết cách chăm sóc hoa lan sau khi mua không?
+    - Tôi muốn biết cách bảo quản hoa tươi lâu hơn, bạn có thể giúp tôi không?
+    - Có cách nào để giữ cho hoa tươi lâu hơn không?
+    - Bạn có thể gợi ý một số phương pháp chăm sóc hoa đơn giản không?
+
+- intent: flower_customization
+  examples: |
+    - Tôi muốn đặt làm một bó hoa theo yêu cầu, bạn có thể giúp tôi không?
+    - Bạn có thể tạo ra một bó hoa độc đáo dành cho dịp đặc biệt của tôi không?
+    - Tôi muốn thêm một số loại hoa cụ thể vào bó hoa của mình, bạn có thể làm được không?
+    - Bạn có thể tùy chỉnh một bó hoa theo ý tưởng của tôi không?
+
+- intent: flower_availability
+  examples: |
+    - Bạn có còn hoa hồng màu đỏ trong cửa hàng không?
+    - Tôi muốn biết liệu bạn còn có hoa lan trắng không?
+    - Bạn có những loại hoa nào đang có sẵn vào thời điểm này?
+    - Tôi cần biết liệu bạn còn có hoa baby's breath không?
+    - Bạn có thể kiểm tra xem cửa hàng còn hoa paeonia không?
+    
+- intent: flower_quantity
+  examples: |
+    - Tôi muốn mua một bó hoa lớn, bạn có thể tư vấn về số lượng hoa trong bó không?
+    - Bạn có thể giúp tôi chọn số lượng hoa phù hợp cho bó hoa của tôi không?
+    - Tôi cần mua một số bó hoa nhỏ để trang trí, bạn có thể đề xuất số lượng phù hợp không?
+    - Bạn có thể tư vấn về số lượng hoa phù hợp cho việc tặng quà không?
+
+- intent: flower_color
+  examples: |
+    - Tôi muốn biết bạn có những loại hoa màu đỏ nào trong cửa hàng không?
+    - Bạn có thể cho tôi biết các loại hoa màu pastel mà bạn có không?
+    - Tôi muốn mua hoa có màu trắng, bạn có thể gợi ý cho tôi không?
+    - Tôi đang tìm kiếm hoa màu hồng để tặng cho một người bạn, bạn có thể giới thiệu cho tôi không?
+    - Bạn có những loại hoa nào có màu sắc đa dạng nhất không?
+
+
+- intent: flower_seasonal
+  examples: |
+    - Bạn có thể cho tôi biết các loại hoa mùa xuân đang có sẵn không?
+    - Tôi muốn biết các loại hoa mùa hè phổ biến nhất hiện nay.
+    - Bạn có thể giới thiệu cho tôi các loại hoa mùa thu đang được ưa chuộng không?
+    - Tôi cần một số gợi ý về hoa mùa đông phù hợp để trang trí nhà cửa, bạn có thể giúp tôi không?
+    - Bạn có thể tư vấn về các loại hoa phù hợp với mùa của dịp đặc biệt mà tôi đang chuẩn bị không?
