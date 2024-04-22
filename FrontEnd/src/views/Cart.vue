@@ -15,21 +15,11 @@
             </div>
           </div>
 
-          <div
-            v-for="(item, index) in this.showProduct"
-            :key="index"
-            class="row border-top border-bottom"
-          >
-            <div
-              class="text-center"
-              v-if="this.Cart.idProduct_item.length == 0"
-            >
+          <div v-for="(item, index) in this.showProduct" :key="index" class="row border-top border-bottom">
+            <div class="text-center" v-if="this.Cart.idProduct_item.length == 0">
               <h3>Giỏ hàng rỗng</h3>
             </div>
-            <div
-              v-if="item.image.url != ''"
-              class="row main align-items-center"
-            >
+            <div v-if="item.image.url != ''" class="row main align-items-center">
               <div class="col-2">
                 <img class="img-fluid" :src="item.image.url" />
               </div>
@@ -38,18 +28,10 @@
                 <div class="row">{{ item.name }}</div>
               </div>
               <div class="col">
-                <input
-                  type="number"
-                  class="border ip-quantity"
-                  min="1"
-                  :max="item.Quantity"
-                  @change="
-                    (e) => {
-                      handleChange(e, item._id);
-                    }
-                  "
-                  v-model="item.quantity"
-                />
+                <input type="number" class="border ip-quantity" min="1" :max="item.Quantity" @change="(e) => {
+                    handleChange(e, item._id);
+                  }
+                  " v-model="item.quantity" />
               </div>
               <div class="col">
                 {{
@@ -67,17 +49,11 @@
                   })
                 }}
               </div>
-              <span @click="deleteProductInCart(item.idCart)" class="close"
-                >&#10005;</span
-              >
+              <span @click="deleteProductInCart(item.idCart)" class="close">&#10005;</span>
             </div>
           </div>
           <div class="back-to-shop">
-            <routerLink to="/home"
-              >&leftarrow;<span class="text-muted"
-                >Trở về cửa hàng</span
-              ></routerLink
-            >
+            <routerLink to="/home">&leftarrow;<span class="text-muted">Trở về cửa hàng</span></routerLink>
           </div>
         </div>
         <div class="col-md-4 summary">
@@ -98,10 +74,7 @@
               }}
             </div>
           </div>
-          <div
-            class="row"
-            style="border-top: 1px solid rgba(0, 0, 0, 0.1); padding: 2vh 0"
-          >
+          <div class="row" style="border-top: 1px solid rgba(0, 0, 0, 0.1); padding: 2vh 0">
             <div class="col">TỔNG CỘNG:</div>
             <div class="col text-right">
               {{
@@ -112,60 +85,40 @@
               }}
             </div>
           </div>
-          <button
-            type="button"
-            class="btn btn-primary"
-            data-toggle="modal"
-            data-target="#exampleModalCenterAdd"
-            style="margin-left: 35px;"
-          >
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenterAdd"
+            style="margin-left: 35px;">
             Chọn địa chỉ giao hàng
           </button>
-          <div class="modal fade" id="exampleModalCenterAdd" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal fade" id="exampleModalCenterAdd" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title" id="exampleModalLongTitle">
                     Địa chỉ của tôi
                   </h5>
-                  <button
-                    type="button"
-                    class="close"
-                    data-dismiss="modal"
-                    aria-label="Close"
-                  >
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
                 <div class="modal-body container-modal">
                   <div class="d-flex" :style="{ flexDirection: 'column' }">
-                    <div
-                      v-for="e in address"
-                      :key="e"
-                      class="py-2 my-2 d-flex align-items-center form-address"
-                      :class="{
-                        'form-address-active': e._id === addressActive,
-                      }"
-                      @click="setAddress(e)"
-                    >
-                      <div
-                        class="container-icon"
-                        v-if="e._id === addressActive"
-                      ></div>
+                    <div v-for="e in address" :key="e" class="py-2 my-2 d-flex align-items-center form-address" :class="{
+                      'form-address-active': e._id === addressActive,
+                    }" @click="setAddress(e)">
+                      <div class="container-icon" v-if="e._id === addressActive"></div>
                       <div>
                         <div class="d-flex align-items-center my-2 fs-13">
                           <span class="font-weight-bold mr-2">Tên: </span>
                           <span>{{ e.name }}</span>
                         </div>
                         <div class="d-flex align-items-center my-2 fs-13">
-                          <span class="font-weight-bold mr-2"
-                            >Số Điện Thoại:
+                          <span class="font-weight-bold mr-2">Số Điện Thoại:
                           </span>
                           <span>{{ e.phone }}</span>
                         </div>
                         <div class="my-2 fs-13">
-                          <span class="d-block font-weight-bold mr-2"
-                            >Địa Chỉ Chi Tiết :
+                          <span class="d-block font-weight-bold mr-2">Địa Chỉ Chi Tiết :
                           </span>
                           <span v-html="e.address"></span>
                         </div>
@@ -174,11 +127,7 @@
                   </div>
                 </div>
                 <div class="modal-footer">
-                  <button
-                    type="button"
-                    class="btn btn-primary"
-                    data-dismiss="modal"
-                  >
+                  <button type="button" class="btn btn-primary" data-dismiss="modal">
                     Đóng
                   </button>
                 </div>
@@ -198,44 +147,27 @@
                   <span>{{ infoAddress.phone }}</span>
                 </div>
                 <div class="my-2 fs-13">
-                  <span class="d-block font-weight-bold mr-2"
-                    >Địa Chỉ Chi Tiết :
+                  <span class="d-block font-weight-bold mr-2">Địa Chỉ Chi Tiết :
                   </span>
                   <span v-html="infoAddress.address"></span>
                 </div>
               </div>
             </div>
           </div>
-          <button
-            type="button"
-            class="btnOder"
-            data-toggle="modal"
-            data-target="#exampleModalCenter"
-          >
+          <button type="button" class="btnOder" data-toggle="modal" data-target="#exampleModalCenter">
             ĐẶT HÀNG
           </button>
 
           <!-- Modal -->
-          <div
-            class="modal fade"
-            id="exampleModalCenter"
-            tabindex="-1"
-            role="dialog"
-            aria-labelledby="exampleModalCenterTitle"
-            aria-hidden="true"
-          >
+          <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title" id="exampleModalLongTitle">
                     Bạn có chắc chắn muốn đặt hàng?
                   </h5>
-                  <button
-                    type="button"
-                    class="close"
-                    data-dismiss="modal"
-                    aria-label="Close"
-                  >
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
@@ -252,10 +184,7 @@
                           <th scope="col">Giá</th>
                         </tr>
                       </thead>
-                      <tbody
-                        v-for="(item, index) in this.showProduct"
-                        :key="index"
-                      >
+                      <tbody v-for="(item, index) in this.showProduct" :key="index">
                         <tr>
                           <th scope="row">{{ index + 1 }}</th>
                           <td>{{ item.address }}</td>
@@ -267,16 +196,14 @@
                     </table>
 
                     <div>
-                      <b
-                        >Tổng cộng:
+                      <b>Tổng cộng:
                         {{
                           this.Sum.toLocaleString("en-US", {
                             style: "currency",
                             currency: "VND",
                           })
                         }}
-                        VNĐ</b
-                      ><br />
+                        VNĐ</b><br />
                       <div style="margin-top: 5px">
                         <b>Người nhận: </b>
                         <span>{{ infoAddress.name }}</span>
@@ -286,23 +213,16 @@
                         <span v-html="infoAddress.address"></span>
                       </div>
                       <div style="margin-top: 5px">
-                        <b> Số điện thoại khách hàng: </b
-                        >{{ infoAddress.phone }}
+                        <b> Số điện thoại khách hàng: </b>{{ infoAddress.phone }}
                       </div>
                       <div style="margin-top: 5px">
-                        <b
-                          >Thanh toán khi nhận hàng, được giao từ 5-7 ngày kể từ
-                          khi đặt hàng !</b
-                        >
+                        <b>Thanh toán khi nhận hàng, được giao từ 5-7 ngày kể từ
+                          khi đặt hàng !</b>
                       </div>
                     </div>
                   </div>
                   <div class="modal-footer">
-                    <button
-                      type="button"
-                      class="btn btn-secondary"
-                      data-dismiss="modal"
-                    >
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
                       Đóng
                     </button>
                     <button class="btn btn-primary">Đặt hàng</button>
@@ -408,7 +328,7 @@ export default {
           `http://localhost:3000/api/picture/updateQuantity`,
           this.showProduct
         )
-        .then(() => {})
+        .then(() => { })
         .catch((err) => {
           console.log(err);
         });
@@ -426,7 +346,7 @@ export default {
     Revenue() {
       axios
         .post(`http://localhost:3000/api/revenue/create`, this.showProduct)
-        .then(() => {})
+        .then(() => { })
         .catch((err) => {
           console.log(err);
         });
@@ -605,6 +525,7 @@ li.row {
   border: transparent;
 
 }
+
 .container-icon {
   position: absolute;
   left: 0;
@@ -612,11 +533,9 @@ li.row {
   bottom: 0;
   width: 10px;
   background: rgb(255, 0, 29);
-  background: linear-gradient(
-    186deg,
-    rgba(255, 0, 29, 1) 35%,
-    rgba(255, 117, 0, 1) 100%
-  );
+  background: linear-gradient(186deg,
+      rgba(255, 0, 29, 1) 35%,
+      rgba(255, 117, 0, 1) 100%);
 }
 
 .ip-quantity {
@@ -752,6 +671,7 @@ input:focus::-webkit-input-placeholder {
   padding: 1vh;
   border-radius: 0;
 }
+
 .form-address {
   border-top: 1px solid #999;
   border-bottom: 1px solid #999;
@@ -762,10 +682,12 @@ input:focus::-webkit-input-placeholder {
   position: relative;
   overflow: hidden;
 }
+
 .container-modal {
   max-height: 400px !important;
   overflow-y: auto !important;
 }
+
 .form-address-active {
   border-top: 1px solid red;
   border-bottom: 1px solid red;
@@ -795,11 +717,9 @@ a:hover {
 }
 
 #code {
-  background-image: linear-gradient(
-      to left,
+  background-image: linear-gradient(to left,
       rgba(255, 255, 255, 0.253),
-      rgba(255, 255, 255, 0.185)
-    ),
+      rgba(255, 255, 255, 0.185)),
     url("https://img.icons8.com/small/16/000000/long-arrow-right.png");
   background-repeat: no-repeat;
   background-position-x: 95%;
@@ -818,8 +738,9 @@ a:hover {
   width: 1000px;
   margin-top: 300px;
 }
-.mt-5{
+
+.mt-5 {
   margin-bottom: 10px;
-  
+
 }
 </style>

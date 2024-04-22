@@ -29,6 +29,7 @@ const forecastController = {
         const input = [...red, ...green, ...blue];
         return [input, img_width, img_height];
     },
+    
     run_model: async (input) => {
         const model = await ort.InferenceSession.create("E:/florist_web/Backend/src/controllers/best.onnx");
         input = new ort.Tensor(Float32Array.from(input), [1, 3, 640, 640]);

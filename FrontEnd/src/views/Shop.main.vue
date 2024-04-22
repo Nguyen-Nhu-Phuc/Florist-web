@@ -53,7 +53,7 @@
 
   <div class="container-fluid">
     <div class="row">
-      <div class="col-3 category">
+      <div class="col-2 category">
         <!-- DanhMuc -->
         <div class="box border-bottom">
           <div class="box-label text-uppercase d-flex align-items-center">DANH MỤC <button class="btn ml-auto"
@@ -79,7 +79,6 @@
             </div>
           </div>
         </div>
-
 
         <button class="chatBtn" @click="toggleChat">
           <svg height="1.6em" fill="white" xml:space="preserve" viewBox="0 0 1000 1000" y="0px" x="0px" version="1.1">
@@ -107,7 +106,7 @@
         </div>
 
       </div>
-      <div class="col-9">
+      <div class="col-10">
 
         <div id="products">
           <div class="card-container">
@@ -324,7 +323,7 @@ export default {
       }
     },
     checklogin() {
-      if (this.IDcart === undefined) {
+      if (this.IDcart == undefined) {
         alert('Bạn cần đăng nhập khi thêm vào giỏ hàng');
         this.$router.replace({ path: '/login' });
       }
@@ -356,6 +355,20 @@ export default {
 
 
 <style>
+.nut {
+  display: none;
+}
+
+/* Thêm khung bao quanh khi được chọn */
+.my-1 label input[type="radio"]:checked+span {
+  border: 1px solid #007bff;
+  /* Màu và kiểu viền khung */
+  padding: 3px;
+  /* Khoảng cách giữa nội dung và viền khung */
+  border-radius: 4px;
+  /* Bo góc */
+}
+
 /* =========================== */
 
 .chatBtn {
@@ -697,6 +710,8 @@ svg {
 .shop__product.hide {
   display: none;
 }
+
+/* ============================================== */
 
 /* ================================================= */
 .nut {

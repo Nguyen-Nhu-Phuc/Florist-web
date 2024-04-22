@@ -9,7 +9,7 @@
             </div>
             <ul class="header__links">
                 <li class="header__link">
-                    <router-link to="/ai">ai
+                    <router-link to="/ai">flowers ai
                        
                     </router-link>
                 </li>

@@ -38,7 +38,7 @@
                             <td>{{ index + 1 }}</td>
                             <td>{{ item.name }}</td>
                             <td>{{ item.address }}</td>
-                            <td>{{ (item.price).toLocaleString('vi-VN') }} VND</td>
+                            <td>{{ (item.price).toLocaleString('en-US') +' VND'}}</td>
                             <td>{{ item.Quantity }}</td>
                             <td v-if="item.image != undefined"><img class="img-item" :src="`${item.image.url}`"
                                     alt="Ảnh minh họa"></td>
